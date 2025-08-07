@@ -1,190 +1,253 @@
-# 📊 PDF to Excel Converter
+# Enhanced PDF to Excel Converter
 
-A powerful and user-friendly application that converts PDF files to Excel format with advanced text and table extraction capabilities. Built with Streamlit, this application supports both text-based PDFs and scanned documents using OCR technology.
+A powerful Python tool for converting PDF files to Excel format with **complete data preservation** and **no truncation**. This enhanced converter automatically detects PDF types and uses the best extraction method for optimal results.
 
-## ✨ Features
+## 🚀 Key Features
 
-- **Hybrid Extraction**: Combines text-based extraction (pdfplumber) with OCR (Tesseract) for maximum compatibility
-- **Table Detection**: Automatically detects and extracts tables from PDF documents
-- **Modern UI**: Beautiful, responsive interface built with Streamlit
-- **Formatting Options**: Configurable Excel output with styling and formatting
-- **Progress Tracking**: Real-time progress indicators during conversion
-- **Preview Functionality**: Preview extracted data before downloading
-- **Batch Processing**: Support for multiple file formats and sizes
-- **Error Handling**: Comprehensive error handling and user feedback
+- **🔍 Smart Detection**: Automatically detects text-based vs image-based PDFs
+- **📄 Full Data Preservation**: No text truncation or data loss
+- **📊 Table Structure**: Preserves original table formatting and columns
+- **🖼️ Advanced OCR**: Multiple OCR configurations for best accuracy
+- **📋 Multiple Output Sheets**: Organized Excel output with separate sheets
+- **🔧 Easy Configuration**: Simple setup with configurable settings
+- **📁 Batch Processing**: Handle multiple files efficiently
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-1. **Python 3.8+** installed on your system
-2. **Tesseract OCR** installed (for scanned PDF support)
-
-#### Installing Tesseract OCR
-
-**Windows:**
-```bash
-# Download and install from: https://github.com/UB-Mannheim/tesseract/wiki
-# Add to PATH: C:\Program Files\Tesseract-OCR
-```
-
-**macOS:**
-```bash
-brew install tesseract
-```
-
-**Linux (Ubuntu/Debian):**
-```bash
-sudo apt-get install tesseract-ocr
-```
-
-### Installation
-
-1. **Clone the repository:**
-```bash
-git clone <repository-url>
-cd pdf-to-excel-converter
-```
-
-2. **Install Python dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Run the application:**
-```bash
-streamlit run app.py
-```
-
-4. **Open your browser** and navigate to `http://localhost:8501`
-
-## 📖 Usage
-
-### Basic Usage
-
-1. **Upload PDF**: Click the upload area and select your PDF file
-2. **Configure Settings**: Adjust extraction options in the sidebar
-3. **Convert**: Click the "Convert to Excel" button
-4. **Download**: Download your converted Excel file
-
-### Advanced Settings
-
-#### Extraction Options
-- **Enable OCR**: Toggle OCR for scanned PDFs
-- **OCR DPI**: Adjust image quality for OCR processing (150-600 DPI)
-
-#### Output Options
-- **Include Formatting**: Add colors, borders, and styling to Excel
-- **Auto-adjust Columns**: Automatically resize columns based on content
-
-#### Advanced Options
-- **Minimum Text Threshold**: Minimum characters to consider PDF as text-based
-- **Maximum Column Width**: Maximum width for auto-adjusted columns
-
-## 🏗️ Project Structure
+## 📁 Project Structure
 
 ```
 pdf-to-excel-converter/
-├── app.py                 # Main Streamlit application
-├── requirements.txt       # Python dependencies
-├── README.md             # Project documentation
-├── core/                 # Core processing modules
-│   ├── __init__.py
-│   ├── extractor.py      # PDF extraction logic
-│   └── converter.py      # Excel conversion logic
-├── output/               # Generated Excel files
-├── assets/               # Static assets
-└── utils/                # Utility functions
+├── 🚀 enhanced_pdf_converter.py    # Main enhanced converter
+├── ⚙️ config_standalone.py         # Configuration settings
+├── 📖 README_standalone.md         # Detailed documentation
+├── 📋 example_usage.py             # Usage examples
+├── 📦 requirements.txt             # Python dependencies
+├── 📁 input_folder/                # Input PDF files
+├── 📁 output_folder/               # Output Excel files
+└── 📁 temp/                        # Temporary files
 ```
 
-## 🔧 Core Modules
+## 🛠️ Installation
 
-### PDFExtractor (`core/extractor.py`)
-- Handles text and table extraction from PDFs
-- Supports both text-based and image-based PDFs
-- Uses pdfplumber for text extraction
-- Falls back to Tesseract OCR for scanned documents
+### Prerequisites
 
-### ExcelConverter (`core/converter.py`)
-- Converts extracted data to Excel format
-- Applies formatting and styling
-- Handles multiple tables and sheets
-- Auto-adjusts column widths
+1. **Python 3.7+**
+2. **Tesseract OCR** (for OCR functionality)
+3. **Poppler** (for PDF to image conversion)
 
-## 🎯 Supported PDF Types
+### Install Dependencies
 
-### Text-based PDFs
-- Documents with selectable text
-- Tables with clear structure
-- Forms and reports
-- Invoices and receipts
+```bash
+# Clone the repository
+git clone https://github.com/GeedikantiSunitha/pdf-to-excel-converter.git
+cd pdf-to-excel-converter
 
-### Scanned PDFs
-- Image-based documents
-- Handwritten text (with OCR)
-- Printed documents
-- Historical documents
+# Install Python dependencies
+pip install -r requirements.txt
+```
 
-## 📊 Output Format
+### External Dependencies
 
-The application generates Excel files with:
-- **Multiple Sheets**: One sheet per table found
-- **Formatted Headers**: Styled headers with colors and borders
-- **Auto-sized Columns**: Optimized column widths
-- **Data Validation**: Clean, structured data
-- **Metadata**: Processing information and timestamps
+#### Tesseract OCR
+- **Windows**: Download from [UB-Mannheim](https://github.com/UB-Mannheim/tesseract/wiki)
+- **Linux**: `sudo apt-get install tesseract-ocr`
+- **macOS**: `brew install tesseract`
 
-## 🛠️ Troubleshooting
+#### Poppler
+- **Windows**: Download from [poppler-windows](https://github.com/oschwartz10612/poppler-windows/releases)
+- **Linux**: `sudo apt-get install poppler-utils`
+- **macOS**: `brew install poppler`
+
+## 🚀 Quick Start
+
+### 1. Basic Usage
+
+```bash
+# Interactive mode
+python enhanced_pdf_converter.py
+
+# Direct mode
+python enhanced_pdf_converter.py "input.pdf" "output.xlsx"
+```
+
+### 2. Python Script Usage
+
+```python
+from enhanced_pdf_converter import enhanced_pdf_to_excel
+
+success = enhanced_pdf_to_excel("input.pdf", "output.xlsx")
+if success:
+    print("✅ Conversion successful!")
+```
+
+### 3. Batch Processing
+
+```python
+import os
+from enhanced_pdf_converter import enhanced_pdf_to_excel
+
+for filename in os.listdir("pdfs/"):
+    if filename.endswith(".pdf"):
+        pdf_path = f"pdfs/{filename}"
+        excel_path = f"output/{filename.replace('.pdf', '.xlsx')}"
+        enhanced_pdf_to_excel(pdf_path, excel_path)
+```
+
+## 📊 Excel Output Structure
+
+The enhanced converter creates an Excel file with multiple sheets:
+
+1. **All_Text_Content**: Complete text extraction with page and line numbers
+2. **Tables**: Individual sheets for each table found (preserved structure)
+3. **Page_Summary**: Overview of content found on each page
+4. **Raw_Data**: Detailed extraction data for debugging
+
+## 🔧 Configuration
+
+Edit `config_standalone.py` to customize settings:
+
+```python
+# OCR Settings
+TESSERACT_PATH = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+POPPLER_PATH = r'C:\path\to\poppler\bin'
+OCR_DPI = 300  # Higher DPI = better quality but slower
+OCR_CONFIG = "--psm 6"
+
+# Text Extraction
+MIN_TEXT_LENGTH = 50  # Minimum characters to consider as text-based PDF
+MIN_LINE_LENGTH = 2   # Minimum characters for a line to be included
+
+# Output Settings
+DEFAULT_OUTPUT_DIR = "output"
+INCLUDE_HEADERS = False
+```
+
+## 🎯 Advanced Features
+
+### 1. **Enhanced Text Extraction**
+- Word-level precision extraction
+- Preserves full content without truncation
+- Multiple fallback methods for reliability
+
+### 2. **Smart Table Detection**
+- Preserves original table structure
+- Maintains column alignment
+- Handles complex table layouts
+
+### 3. **Advanced OCR**
+- Multiple OCR configurations for best results
+- Higher DPI processing for accuracy
+- Automatic configuration selection
+
+### 4. **Comprehensive Error Handling**
+- Graceful fallbacks between methods
+- Detailed logging and error reporting
+- Robust file validation
+
+## 📋 Usage Examples
+
+### Check Configuration
+```bash
+python config_standalone.py
+```
+
+### Run Examples
+```bash
+python example_usage.py
+```
+
+### Convert with Error Handling
+```python
+from enhanced_pdf_converter import enhanced_pdf_to_excel
+import os
+
+def safe_convert(pdf_path, excel_path):
+    if not os.path.exists(pdf_path):
+        print(f"❌ File not found: {pdf_path}")
+        return False
+    
+    success = enhanced_pdf_to_excel(pdf_path, excel_path)
+    if success and os.path.exists(excel_path):
+        file_size = os.path.getsize(excel_path)
+        print(f"✅ Success! File size: {file_size} bytes")
+        return True
+    return False
+
+# Usage
+safe_convert("document.pdf", "output.xlsx")
+```
+
+## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Tesseract not found**
-   - Ensure Tesseract is installed and in your PATH
-   - Restart your terminal after installation
+1. **Tesseract Not Found**
+   ```
+   ❌ Tesseract not available. Cannot perform OCR.
+   ```
+   **Solution**: Install Tesseract OCR and update path in `config_standalone.py`
 
-2. **PDF extraction fails**
-   - Check if the PDF contains readable text
-   - Try enabling OCR for scanned documents
-   - Verify PDF file integrity
+2. **No Content Extracted**
+   ```
+   ❌ No content could be extracted from the PDF
+   ```
+   **Possible Causes**:
+   - PDF is password protected
+   - PDF contains only images with poor quality
+   - PDF is corrupted
+   
+   **Solutions**:
+   - Remove password protection
+   - Improve image quality
+   - Try a different PDF
 
-3. **Memory issues with large files**
-   - Reduce OCR DPI setting
-   - Process smaller files
-   - Increase system memory
+3. **Table Structure Lost**
+   ```
+   Tables appear as single lines
+   ```
+   **Solution**: The enhanced converter automatically preserves table structure
 
 ### Performance Tips
 
-- **For text-based PDFs**: Disable OCR for faster processing
-- **For scanned PDFs**: Use higher DPI for better accuracy
-- **For large files**: Process in smaller batches
+- **For Speed**: Use lower OCR_DPI (200-300)
+- **For Accuracy**: Use higher OCR_DPI (400-600)
+- **For Large Files**: Process in batches
+- **For Tables**: The enhanced converter automatically handles table preservation
+
+## 📄 Requirements
+
+```
+pdfplumber>=0.7.0
+pytesseract>=0.3.8
+pdf2image>=1.16.0
+pandas>=1.3.0
+openpyxl>=3.0.0
+Pillow>=8.0.0
+```
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
-- **Streamlit** for the amazing web framework
-- **pdfplumber** for PDF text extraction
-- **Tesseract** for OCR capabilities
-- **pandas** for data manipulation
-- **openpyxl** for Excel file generation
+- [pdfplumber](https://github.com/jsvine/pdfplumber) for PDF text extraction
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) for OCR functionality
+- [pandas](https://pandas.pydata.org/) for data manipulation
 
 ## 📞 Support
 
-If you encounter any issues or have questions:
-1. Check the troubleshooting section
-2. Search existing issues
-3. Create a new issue with detailed information
+- **Issues**: [GitHub Issues](https://github.com/GeedikantiSunitha/pdf-to-excel-converter/issues)
+- **Documentation**: See `README_standalone.md` for detailed documentation
+- **Examples**: Check `example_usage.py` for usage examples
 
 ---
 
-**Made with ❤️ for the data community** 
+**Made with ❤️ for efficient PDF to Excel conversion with complete data preservation** 
