@@ -257,7 +257,7 @@ def extract_text_ocr_enhanced(pdf_path: str) -> Dict[str, Any]:
     try:
         # Convert PDF to images with higher DPI for better accuracy
         logger.info("🔄 Converting PDF to images...")
-        images = convert_from_path(pdf_path, dpi=OCR_DPI + 100)  # Higher DPI for better accuracy
+        images = convert_from_path(pdf_path, dpi=OCR_DPI + 100, poppler_path=POPPLER_PATH)  # Higher DPI for better accuracy
         
         for page_num, img in enumerate(images, 1):
             logger.info(f"🔄 Processing page {page_num}/{len(images)} with OCR...")

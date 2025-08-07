@@ -20,7 +20,7 @@ TESSERACT_PATH = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Windows: Download from https://github.com/oschwartz10612/poppler-windows/releases
 # Linux: Install with "sudo apt-get install poppler-utils"
 # macOS: Install with "brew install poppler"
-POPPLER_PATH = r'C:\path\to\poppler\bin'  # Update this path
+POPPLER_PATH = r'C:\Users\prash\Downloads\Release-23.11.0-0\poppler-23.11.0\Library\bin'  # Updated path
 
 # =============================================================================
 # PROCESSING CONFIGURATION
