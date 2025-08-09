@@ -6,7 +6,7 @@ This script demonstrates various ways to use the converter.
 
 import os
 import sys
-from standalone_hybrid_converter import hybrid_pdf_to_excel
+from enhanced_pdf_converter import enhanced_pdf_to_excel
 
 def example_single_conversion():
     """Example: Convert a single PDF file"""
@@ -20,7 +20,7 @@ def example_single_conversion():
     
     if os.path.exists(pdf_path):
         print(f"Converting: {pdf_path}")
-        success = hybrid_pdf_to_excel(pdf_path, excel_path)
+        success = enhanced_pdf_to_excel(pdf_path, excel_path)
         
         if success:
             print(f"✅ Success! Output saved to: {excel_path}")
@@ -63,7 +63,7 @@ def example_batch_conversion():
         excel_path = os.path.join(output_folder, excel_file)
         
         print(f"\n🔄 Converting: {pdf_file}")
-        success = hybrid_pdf_to_excel(pdf_path, excel_path)
+        success = enhanced_pdf_to_excel(pdf_path, excel_path)
         
         if success:
             print(f"✅ Success: {excel_file}")
@@ -94,7 +94,7 @@ def example_with_error_handling():
                 print(f"📁 Created output directory: {output_dir}")
             
             # Perform conversion
-            success = hybrid_pdf_to_excel(pdf_path, excel_path)
+            success = enhanced_pdf_to_excel(pdf_path, excel_path)
             
             if success:
                 # Verify output file was created
@@ -141,12 +141,12 @@ def main():
     print("🔧 Standalone PDF to Excel Converter - Examples")
     print("=" * 60)
     
-    # Check if standalone converter is available
+    # Check if enhanced converter is available
     try:
-        from standalone_hybrid_converter import hybrid_pdf_to_excel
+        from enhanced_pdf_converter import enhanced_pdf_to_excel
     except ImportError as e:
         print(f"❌ Error importing converter: {e}")
-        print("💡 Make sure standalone_hybrid_converter.py is in the same directory")
+        print("💡 Make sure enhanced_pdf_converter.py is in the same directory")
         return
     
     # Run examples
